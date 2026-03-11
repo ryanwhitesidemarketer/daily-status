@@ -35,13 +35,16 @@ def make_headers(token):
     }
 
 
-def get_all_pages(url, headers):
+def get_all_pages(url, headers, required=False):
     """Follow Basecamp pagination via Link header."""
     results = []
     while url:
         r = requests.get(url, headers=headers, timeout=30)
         if r.status_code != 200:
-            print(f"  WARN {r.status_code}: {url}")
+            msg = f"  {'ERROR' if required else 'WARN'} {r.status_code}: {url}"
+            print(msg)
+            if required:
+                sys.exit(f"Required API call failed with {r.status_code}: {url}")
             break
         data = r.json()
         if isinstance(data, list):
@@ -131,10 +134,20 @@ def main():
 
     # ── Collect todos assigned to Ryan (single efficient endpoint) ───────────
     print("Fetching assignments...")
+    items = get_all_pages(f"{API_BASE}/my/assignments.json", headers, required=True)
+    print(f"  Raw items returned: {len(items)}")
+
+    # Debug: show type distribution so we can verify the filter
+    from collections import Counter
+    type_counts = Counter(i.get("type", "NO_TYPE") for i in items)
+    print(f"  Types: {dict(type_counts)}")
+
     raw_todos = []
-    items = get_all_pages(f"{API_BASE}/my/assignments.json", headers)
     for item in items:
-        if item.get("type") == "Todo" and not item.get("completed", False):
+        # Accept Todo and any todo-like type; skip completed items
+        item_type = item.get("type", "")
+        is_todo = "todo" in item_type.lower()
+        if is_todo and not item.get("completed", False):
             raw_todos.append(item)
 
     print(f"Found {len(raw_todos)} active todos assigned to Ryan")
