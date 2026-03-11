@@ -1,235 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Two Wheels Marketing — Daily Status</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      background: #f0f2f5;
-      color: #1a1a2e;
-      min-height: 100vh;
-    }
-    header {
-      background: #1a1a2e;
-      color: white;
-      padding: 22px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    header h1 { font-size: 1.25rem; font-weight: 700; }
-    header .meta { font-size: 0.8rem; color: #a0aec0; }
-    header a { color: #63b3ed; text-decoration: none; }
-    header a:hover { text-decoration: underline; }
-
-    .container { max-width: 1050px; margin: 0 auto; padding: 28px 20px; }
-
-    .summary-bar { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
-    .pill {
-      background: white;
-      border-radius: 8px;
-      padding: 9px 16px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .pill-action { border-left: 4px solid #e53e3e; color: #c53030; }
-    .pill-waiting { border-left: 4px solid #3182ce; color: #2b6cb0; }
-    .pill-total { border-left: 4px solid #718096; color: #4a5568; }
-
-    .section { margin-bottom: 28px; }
-    .section-header {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;
-    }
-    .section-header h2 { font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; }
-    .section-header .count { background: #edf2f7; color: #4a5568; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
-    .section-action .section-header h2 { color: #c53030; }
-    .section-action .section-header { border-color: #fed7d7; }
-    .section-waiting .section-header h2 { color: #2b6cb0; }
-    .section-waiting .section-header { border-color: #bee3f8; }
-
-    .card { background: white; border-radius: 10px; box-shadow: 0 1px 5px rgba(0,0,0,0.07); margin-bottom: 10px; overflow: hidden; border-left: 4px solid transparent; transition: box-shadow 0.15s; }
-    .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.11); }
-    .card-action { border-left-color: #fc8181; }
-    .card-action-urgent { border-left-color: #e53e3e; }
-    .card-waiting { border-left-color: #63b3ed; }
-    .card-followup { border-left-color: #f6ad55; }
-
-    .card-inner { padding: 16px 20px; display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; align-items: start; }
-    .card-left { min-width: 0; }
-    .card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; white-space: nowrap; }
-
-    .task-title { font-size: 0.97rem; font-weight: 700; color: #1a1a2e; margin-bottom: 3px; }
-    .task-title a { color: inherit; text-decoration: none; }
-    .task-title a:hover { text-decoration: underline; }
-    .task-meta { font-size: 0.76rem; color: #718096; margin-bottom: 9px; }
-    .task-meta strong { color: #4a5568; }
-    .status-line { font-size: 0.88rem; font-weight: 600; margin-bottom: 7px; }
-    .status-action { color: #c53030; }
-    .status-waiting { color: #2b6cb0; }
-    .status-followup { color: #c05621; }
-
-    .context { font-size: 0.83rem; color: #4a5568; line-height: 1.5; background: #f7fafc; border-left: 3px solid #e2e8f0; padding: 7px 11px; border-radius: 0 5px 5px 0; }
-
-    .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.04em; }
-    .badge-action { background: #fff5f5; color: #e53e3e; border: 1px solid #fed7d7; }
-    .badge-waiting { background: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8; }
-    .badge-followup { background: #fffaf0; color: #c05621; border: 1px solid #feebc8; }
-
-    .due-tag { font-size: 0.76rem; font-weight: 600; padding: 3px 8px; border-radius: 5px; }
-    .due-overdue { background: #fff5f5; color: #e53e3e; }
-    .due-ok { background: #f0fff4; color: #276749; }
-    .due-none { background: #edf2f7; color: #a0aec0; font-weight: 400; }
-
-    .wait-time { font-size: 0.74rem; color: #718096; text-align: right; }
-    .wait-time.warn { color: #c05621; font-weight: 600; }
-
-    .bc-link { font-size: 0.72rem; color: #a0aec0; text-decoration: none; }
-    .bc-link:hover { color: #4299e1; text-decoration: underline; }
-
-    footer { text-align: center; padding: 24px; font-size: 0.74rem; color: #a0aec0; }
-    footer a { color: #a0aec0; }
-
-    @media (max-width: 620px) {
-      .card-inner { grid-template-columns: 1fr; }
-      .card-right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basecamp Daily Status</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
+header { background: #1a1a2e; color: #fff; padding: 20px 28px;
+          display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+header h1 { font-size: 20px; font-weight: 700; letter-spacing: -.3px; }
+.updated { font-size: 12px; color: #8888aa; }
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; padding: 20px 28px 8px; }
+.stat { background: #fff; border-radius: 10px; padding: 14px 18px; text-align: center;
+         box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+.stat-num { font-size: 32px; font-weight: 800; line-height: 1; }
+.stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #888; margin-top: 4px; }
+.stat-action  .stat-num { color: #e03131; }
+.stat-waiting .stat-num { color: #e67700; }
+.stat-total   .stat-num { color: #2f9e44; }
+.section { padding: 16px 28px; }
+.section-header { font-size: 14px; font-weight: 700; text-transform: uppercase;
+                   letter-spacing: .06em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid; }
+.section-action  .section-header { color: #e03131; border-color: #ffc9c9; }
+.section-waiting .section-header { color: #e67700; border-color: #ffe8cc; }
+.card { background: #fff; border-radius: 10px; padding: 14px 16px; margin-bottom: 8px;
+         border-left: 4px solid; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.card-action  { border-left-color: #e03131; }
+.card-waiting { border-left-color: #e67700; }
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
+.card-title { font-weight: 600; font-size: 14px; color: #1a1a2e; text-decoration: none; flex: 1; }
+.card-title:hover { text-decoration: underline; }
+.due-badge { font-size: 11px; background: #fff0f0; color: #e03131; border-radius: 4px;
+              padding: 2px 7px; font-weight: 600; white-space: nowrap; }
+.card-meta { font-size: 12px; color: #999; margin-bottom: 5px; }
+.card-note { font-size: 13px; color: #555; line-height: 1.5; }
+.empty { color: #aaa; font-size: 14px; padding: 8px 0; }
+@media (max-width: 480px) {
+  header, .section { padding-left: 16px; padding-right: 16px; }
+  .stats { padding: 16px; gap: 8px; }
+}
+</style>
 </head>
 <body>
-
 <header>
-  <div>
-    <h1>Two Wheels Marketing — Daily Status</h1>
-    <div class="meta" style="margin-top:4px;">Basecamp · 2026 Tasks From Michelle, Anetra, Jana</div>
-  </div>
-  <div class="meta" style="text-align:right;">
-    Updated: March 11, 2026 · 3:00 AM<br>
-    <a href="https://3.basecamp.com/4114768/buckets/23707207/todosets/4077126187" target="_blank">Open in Basecamp ↗</a>
-  </div>
+  <h1>📋 Basecamp Daily Status</h1>
+  <span class="updated">Updated: 2026-03-11 20:41:48 UTC · Refreshes at 3am daily</span>
 </header>
-
-<div class="container">
-
-  <div class="summary-bar">
-    <div class="pill pill-action">🔴 3 Need Your Action</div>
-    <div class="pill pill-waiting">🔵 2 Waiting on Others</div>
-    <div class="pill pill-total">📋 5 Active Tasks</div>
-  </div>
-
-  <div class="section section-action">
-    <div class="section-header">
-      <h2>🔴 Action Required — Someone is waiting on you</h2>
-      <span class="count">3</span>
-    </div>
-
-    <div class="card card-action-urgent">
-      <div class="card-inner">
-        <div class="card-left">
-          <div class="task-title"><a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9614912885" target="_blank">CallRail Social/GBP Tracking Number Being Deactivated</a></div>
-          <div class="task-meta">Assigned to: <strong>Ryan W.</strong> &nbsp;·&nbsp; 17 notes &nbsp;·&nbsp; Last reply: Jana L. (Feb 27)</div>
-          <div class="status-line status-action">⚠️ Jana is waiting on you — 12 days with no response</div>
-          <div class="context">Jana (Feb 27): "I fibbed. There's a request to ask CallRail to send us a report next month that they audited this." — You need to follow up with CallRail about the audit report and reply to Jana with confirmation.</div>
-        </div>
-        <div class="card-right">
-          <span class="badge badge-action">Action Required</span>
-          <span class="due-tag due-overdue">Due Feb 25 · Overdue</span>
-          <span class="wait-time warn">12 days since last reply</span>
-          <a class="bc-link" href="https://3.basecamp.com/4114768/buckets/23707207/todos/9614912885" target="_blank">Open in Basecamp ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card card-action">
-      <div class="card-inner">
-        <div class="card-left">
-          <div class="task-title"><a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609968633" target="_blank">Modento Tracking</a></div>
-          <div class="task-meta">Assigned to: <strong>Ryan W.</strong> &nbsp;·&nbsp; 0 notes &nbsp;·&nbsp; Opened by Anetra (Feb 23)</div>
-          <div class="status-line status-action">⚠️ No update from you in Basecamp — 16 days since task was opened</div>
-          <div class="context">Anetra (Feb 23): Connect Google Tag Manager to Modento for Goochland Dentistry (LD). No reply or status update from Ryan in the thread. Post an update even if in progress.</div>
-        </div>
-        <div class="card-right">
-          <span class="badge badge-action">Action Required</span>
-          <span class="due-tag due-none">No due date</span>
-          <span class="wait-time warn">16 days, no update</span>
-          <a class="bc-link" href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609968633" target="_blank">Open in Basecamp ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card card-action">
-      <div class="card-inner">
-        <div class="card-left">
-          <div class="task-title"><a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9633005704" target="_blank">Ryan Whiteside Monthly Invoice Submission</a></div>
-          <div class="task-meta">Assigned to: <strong>Laura W., Ryan W.</strong> &nbsp;·&nbsp; Repeats 2nd of each month &nbsp;·&nbsp; Michelle notified</div>
-          <div class="status-line status-action">⚠️ Invoice not yet submitted — due in 22 days</div>
-          <div class="context">Michelle (Mar 2): "Ryan, Please submit your invoice here to me." Submit your monthly invoice to Michelle before April 2.</div>
-        </div>
-        <div class="card-right">
-          <span class="badge badge-action">Action Required</span>
-          <span class="due-tag due-ok">Due Apr 2</span>
-          <span class="wait-time">Not urgent yet</span>
-          <a class="bc-link" href="https://3.basecamp.com/4114768/buckets/23707207/todos/9633005704" target="_blank">Open in Basecamp ↗</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="section section-waiting">
-    <div class="section-header">
-      <h2>🔵 Waiting on Others — You've replied</h2>
-      <span class="count">2</span>
-    </div>
-
-    <div class="card card-followup">
-      <div class="card-inner">
-        <div class="card-left">
-          <div class="task-title"><a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609972550" target="_blank">CallRail Check</a></div>
-          <div class="task-meta">Assigned to: <strong>Ryan W.</strong> &nbsp;·&nbsp; 1 note &nbsp;·&nbsp; You replied: Mar 3</div>
-          <div class="status-line status-followup">💡 Waiting on Anetra to provide access — 8 days</div>
-          <div class="context">You (Mar 3): "Anetra I don't have access to the link." Waiting for Anetra to share access to the CallRail check for Whiteboard Marketing. 8 days with no response — may be worth a follow-up ping.</div>
-        </div>
-        <div class="card-right">
-          <span class="badge badge-followup">Follow Up?</span>
-          <span class="due-tag due-none">No due date</span>
-          <span class="wait-time warn">8 days waiting</span>
-          <a class="bc-link" href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609972550" target="_blank">Open in Basecamp ↗</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="card card-waiting">
-      <div class="card-inner">
-        <div class="card-left">
-          <div class="task-title"><a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609963251" target="_blank">Create Conversion Goals in GA</a></div>
-          <div class="task-meta">Assigned to: <strong>Ryan W.</strong> &nbsp;·&nbsp; Task opened: Feb 23 (Anetra)</div>
-          <div class="status-line status-waiting">⏳ Waiting for Calendly access — blocked</div>
-          <div class="context">Task in progress for Dental Accounting Group (DAG). You're waiting to receive Calendly access before this can be completed. Consider posting a Basecamp note with your blocker so the thread reflects current status.</div>
-        </div>
-        <div class="card-right">
-          <span class="badge badge-waiting">Waiting</span>
-          <span class="due-tag due-none">No due date</span>
-          <span class="wait-time">Blocked — pending access</span>
-          <a class="bc-link" href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609963251" target="_blank">Open in Basecamp ↗</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
+<div class="stats">
+  <div class="stat stat-action"> <div class="stat-num">0</div> <div class="stat-label">Action Needed</div></div>
+  <div class="stat stat-waiting"><div class="stat-num">0</div><div class="stat-label">Waiting On</div></div>
+  <div class="stat stat-total">  <div class="stat-num">0</div> <div class="stat-label">Total Active</div></div>
 </div>
-
-<footer>
-  Generated by Claude &nbsp;·&nbsp; Source: <a href="https://3.basecamp.com/4114768/buckets/23707207/todosets/4077126187" target="_blank">Basecamp To-dos</a> &nbsp;·&nbsp; Refreshes daily at 3:00 AM
-</footer>
-
+<div class="section section-action">
+  <div class="section-header">⚠ Action Required</div>
+  <p class="empty">All clear — nothing needs your attention!</p>
+</div>
+<div class="section section-waiting">
+  <div class="section-header">⏳ Waiting on Others</div>
+  <p class="empty">No items waiting on others.</p>
+</div>
 </body>
 </html>
