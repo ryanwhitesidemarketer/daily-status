@@ -129,22 +129,13 @@ def main():
     ryan_last  = auth_data["identity"]["last_name"]
     print(f"Authenticated as {ryan_first} {ryan_last} (ID: {ryan_id})")
 
-    # ── Fetch all projects ────────────────────────────────────────────────────
-    print("Fetching projects...")
-    projects = get_all_pages(f"{API_BASE}/projects.json", headers)
-    print(f"  {len(projects)} active projects")
-
-    # ── Collect todos assigned to Ryan ────────────────────────────────────────
+    # ── Collect todos assigned to Ryan (single efficient endpoint) ───────────
+    print("Fetching assignments...")
     raw_todos = []
-    for proj in projects:
-        pid   = proj["id"]
-        pname = proj.get("name", "?")
-        url   = f"{API_BASE}/projects/{pid}/people/{ryan_id}/assignments.json"
-        items = get_all_pages(url, headers)
-        for item in items:
-            if item.get("type") == "Todo" and not item.get("completed", False):
-                item["_project_name"] = pname
-                raw_todos.append(item)
+    items = get_all_pages(f"{API_BASE}/my/assignments.json", headers)
+    for item in items:
+        if item.get("type") == "Todo" and not item.get("completed", False):
+            raw_todos.append(item)
 
     print(f"Found {len(raw_todos)} active todos assigned to Ryan")
 
