@@ -3,63 +3,326 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Basecamp Daily Status</title>
+<title>Two Wheels Marketing — Daily Status</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: #f0f2f5; color: #1a1a2e; min-height: 100vh; }
-header { background: #1a1a2e; color: #fff; padding: 20px 28px;
-          display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-header h1 { font-size: 20px; font-weight: 700; letter-spacing: -.3px; }
-.updated { font-size: 12px; color: #8888aa; }
-.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; padding: 20px 28px 8px; }
-.stat { background: #fff; border-radius: 10px; padding: 14px 18px; text-align: center;
-         box-shadow: 0 1px 4px rgba(0,0,0,.07); }
-.stat-num { font-size: 32px; font-weight: 800; line-height: 1; }
-.stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #888; margin-top: 4px; }
-.stat-action  .stat-num { color: #e03131; }
-.stat-waiting .stat-num { color: #e67700; }
-.stat-total   .stat-num { color: #2f9e44; }
-.section { padding: 16px 28px; }
-.section-header { font-size: 14px; font-weight: 700; text-transform: uppercase;
-                   letter-spacing: .06em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid; }
-.section-action  .section-header { color: #e03131; border-color: #ffc9c9; }
-.section-waiting .section-header { color: #e67700; border-color: #ffe8cc; }
-.card { background: #fff; border-radius: 10px; padding: 14px 16px; margin-bottom: 8px;
-         border-left: 4px solid; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-.card-action  { border-left-color: #e03131; }
-.card-waiting { border-left-color: #e67700; }
-.card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
-.card-title { font-weight: 600; font-size: 14px; color: #1a1a2e; text-decoration: none; flex: 1; }
-.card-title:hover { text-decoration: underline; }
-.due-badge { font-size: 11px; background: #fff0f0; color: #e03131; border-radius: 4px;
-              padding: 2px 7px; font-weight: 600; white-space: nowrap; }
-.card-meta { font-size: 12px; color: #999; margin-bottom: 5px; }
-.card-note { font-size: 13px; color: #555; line-height: 1.5; }
-.empty { color: #aaa; font-size: 14px; padding: 8px 0; }
-@media (max-width: 480px) {
-  header, .section { padding-left: 16px; padding-right: 16px; }
-  .stats { padding: 16px; gap: 8px; }
-}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #222; }
+  .header { background: #1a1a2e; color: #fff; padding: 28px 32px 22px; }
+  .header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.3px; }
+  .header .meta { margin-top: 6px; font-size: 0.82rem; color: #aab; }
+  .summary { display: flex; gap: 12px; padding: 20px 32px; background: #fff; border-bottom: 1px solid #e5e5e5; flex-wrap: wrap; }
+  .pill { padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+  .pill-red { background: #fee2e2; color: #b91c1c; }
+  .pill-blue { background: #dbeafe; color: #1d4ed8; }
+  .pill-gray { background: #f3f4f6; color: #374151; }
+  .section { padding: 24px 32px; }
+  .section-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .card { background: #fff; border-radius: 8px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
+  .card-red { border-left: 4px solid #ef4444; }
+  .card-blue { border-left: 4px solid #3b82f6; }
+  .card-title { font-size: 0.97rem; font-weight: 600; margin-bottom: 6px; }
+  .card-title a { color: #1a1a2e; text-decoration: none; }
+  .card-title a:hover { text-decoration: underline; }
+  .card-meta { font-size: 0.78rem; color: #666; margin-bottom: 8px; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .badge { font-size: 0.72rem; font-weight: 600; padding: 2px 9px; border-radius: 10px; }
+  .badge-red { background: #fee2e2; color: #b91c1c; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+  .badge-orange { background: #ffedd5; color: #c2410c; }
+  .badge-gray { background: #f3f4f6; color: #374151; }
+  .badge-yellow { background: #fef9c3; color: #854d0e; }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .note { font-size: 0.8rem; color: #555; line-height: 1.45; border-top: 1px solid #f0f0f0; padding-top: 8px; margin-top: 4px; }
+  .footer { text-align: center; padding: 20px; font-size: 0.75rem; color: #999; border-top: 1px solid #e5e5e5; margin-top: 8px; }
+  .stale-notice { background: #fef9c3; border: 1px solid #fde68a; padding: 10px 32px; font-size: 0.8rem; color: #854d0e; }
+  .new-batch-header { font-size: 0.8rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin: 18px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #e5e7eb; }
+  .empty-state { color: #9ca3af; font-size: 0.85rem; font-style: italic; padding: 12px 0; }
+  @media(max-width:600px) { .section { padding: 16px; } .summary { padding: 14px 16px; } .header { padding: 20px 16px; } .stale-notice { padding: 10px 16px; } }
 </style>
 </head>
 <body>
-<header>
-  <h1>📋 Basecamp Daily Status</h1>
-  <span class="updated">Updated: 2026-03-30 11:37:16 UTC · Refreshes at 3am daily</span>
-</header>
-<div class="stats">
-  <div class="stat stat-action"> <div class="stat-num">0</div> <div class="stat-label">Action Needed</div></div>
-  <div class="stat stat-waiting"><div class="stat-num">0</div><div class="stat-label">Waiting On</div></div>
-  <div class="stat stat-total">  <div class="stat-num">0</div> <div class="stat-label">Total Active</div></div>
+
+<div class="header">
+  <h1>Two Wheels Marketing — Daily Status</h1>
+  <div class="meta">Updated: March 31, 2026 · 3:00 AM<br>Project: 2026 Tasks From Michelle, Anetra, Jana</div>
 </div>
-<div class="section section-action">
-  <div class="section-header">⚠ Action Required</div>
-  <p class="empty">All clear — nothing needs your attention!</p>
+
+<div class="summary">
+  <span class="pill pill-red">🔴 20 Need Your Action</span>
+  <span class="pill pill-blue">🔵 0 Waiting on Others</span>
+  <span class="pill pill-gray">📋 20 Active Tasks</span>
 </div>
-<div class="section section-waiting">
-  <div class="section-header">⏳ Waiting on Others</div>
-  <p class="empty">No items waiting on others.</p>
+
+<!-- ACTION REQUIRED -->
+<div class="section">
+  <div class="section-title">🔴 Action Required — Someone is waiting on you</div>
+
+  <!-- Modento Tracking -->
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609968633" target="_blank">Modento Tracking</a>
+    </div>
+    <div class="card-meta">Last activity: Michelle · Mar 18 · 13 days waiting · Due: Mar 25</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-green">Unblocked</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Michelle (Mar 18): "Ryan Anetra said you can work on this." — Cleared to proceed. Connect GTM to Modento Goochland Dentistry; test appointment scheduler redirect when possible.</div>
+  </div>
+
+  <!-- CallRail Check -->
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609972550" target="_blank">CallRail Check</a>
+    </div>
+    <div class="card-meta">Last activity: Michelle · Mar 18 · 13 days waiting · Due: Mar 25</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-green">Access Granted</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Michelle (Mar 18): "Ryan Anetra said you should have access to Whiteboard now." — Access to Whiteboard Marketing CallRail has been granted; Ryan can now complete the check.</div>
+  </div>
+
+  <!-- Monthly Invoice -->
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9633005704" target="_blank">Ryan Whiteside Monthly Invoice Submission</a>
+    </div>
+    <div class="card-meta">Last activity: Michelle · Mar 2 · 29 days waiting · Due: Apr 2</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-gray">Due Apr 2</span>
+    </div>
+    <div class="note">Michelle (Mar 2): "Ryan, Please submit your invoice here to me. Thanks." — Repeats 2nd of each month. Due April 2.</div>
+  </div>
+
+  <!-- Create Conversion Goals in GA — Updated with linked task activity -->
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609963251" target="_blank">Create Conversion Goals in GA</a>
+    </div>
+    <div class="card-meta">Last activity: Lydia Piero · Mar 27 (linked task) · 4 days waiting · Due: Mar 25</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-yellow">Updated</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Lydia (Mar 27, linked task): "Perfect, sending this over to them now!" — Ryan confirmed he doesn't have site access to create thank-you page; Lydia is forwarding to web team. Waiting on web team to create the page before conversion tracking can be finalized.</div>
+  </div>
+
+  <!-- Google Ads Conversion Tracking Tasks -->
+  <div class="new-batch-header">Google Ads Conversion Tracking (16 tasks assigned to Ryan)</div>
+
+  <!-- PRIORITY tasks first -->
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693455387" target="_blank">PRIORITY — Schneider Dental Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Mon, Mar 23</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-orange">Priority</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — marked PRIORITY. Verify Google Ads conversion tracking is set up correctly for Schneider Dental.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693478250" target="_blank">PRIORITY — OhioChiro Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Tue, Mar 31</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-orange">Priority</span>
+      <span class="badge badge-orange">Due today</span>
+    </div>
+    <div class="note">Marked PRIORITY — due date moved from Mar 24 to Mar 31 (today). Verify Google Ads conversion tracking is set up correctly for OhioChiro.</div>
+  </div>
+
+  <!-- OVERDUE — Due Mon Mar 23 -->
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693449660" target="_blank">Green Dental - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Mon, Mar 23</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Green Dental.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693451955" target="_blank">Haid Dental - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Mon, Mar 23</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Haid Dental.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693460363" target="_blank">Smiley Dental - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Mon, Mar 23</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Smiley Dental.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693469611" target="_blank">Tzagournis Dental - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Mon, Mar 23</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Tzagournis Dental.</div>
+  </div>
+
+  <!-- Due Thu Mar 26 — now overdue -->
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693489796" target="_blank">Aesthetic Oral Health - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Thu, Mar 26</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Aesthetic Oral Health.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693493538" target="_blank">Craig Callen - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Thu, Mar 26</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Craig Callen.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693497041" target="_blank">Goochland - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Thu, Mar 26</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Goochland.</div>
+  </div>
+
+  <!-- Due Fri Mar 27 — now overdue -->
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693511024" target="_blank">Hicks- Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Fri, Mar 27</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Hicks.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693515087" target="_blank">Indy Implants - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Fri, Mar 27</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Indy Implants.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693519059" target="_blank">Lancaster Family Dental - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Fri, Mar 27</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Lancaster Family Dental.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693548691" target="_blank">Sato - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Fri, Mar 27</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Sato.</div>
+  </div>
+
+  <!-- Due Mon Mar 30 — now overdue -->
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693554140" target="_blank">Sensational Smiles - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Mon, Mar 30</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Sensational Smiles.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693562481" target="_blank">Stiles - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Mon, Mar 30</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Stiles.</div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693567223" target="_blank">Vita - Check Google Ads Conversion Tracking</a>
+    </div>
+    <div class="card-meta">Assigned to Ryan W. · No comments yet · Due: Mon, Mar 30</div>
+    <div class="badges">
+      <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-red">Overdue</span>
+    </div>
+    <div class="note">Overdue — verify Google Ads conversion tracking is set up correctly for Vita.</div>
+  </div>
+
 </div>
+
+<!-- WAITING ON OTHERS -->
+<div class="section">
+  <div class="section-title">🔵 Waiting on Others — You've replied</div>
+  <div class="empty-state">No tasks waiting on others — all active tasks require your action.</div>
+</div>
+
+<div class="footer">Generated by Claude · Refreshes daily at 3:00 AM</div>
+
 </body>
 </html>
