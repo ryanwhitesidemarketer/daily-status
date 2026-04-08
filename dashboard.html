@@ -15,6 +15,7 @@
   .pill-red { background: #fee2e2; color: #b91c1c; }
   .pill-blue { background: #dbeafe; color: #1d4ed8; }
   .pill-gray { background: #f3f4f6; color: #374151; }
+  .pill-green { background: #dcfce7; color: #166534; }
   .section { padding: 24px 32px; }
   .section-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
   .card { background: #fff; border-radius: 8px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
@@ -34,7 +35,7 @@
   .badge-green { background: #dcfce7; color: #166534; }
   .note { font-size: 0.8rem; color: #555; line-height: 1.45; border-top: 1px solid #f0f0f0; padding-top: 8px; margin-top: 4px; }
   .footer { text-align: center; padding: 20px; font-size: 0.75rem; color: #999; border-top: 1px solid #e5e5e5; margin-top: 8px; }
-  .stale-notice { background: #fef9c3; border: 1px solid #fde68a; padding: 10px 32px; font-size: 0.8rem; color: #854d0e; }
+  .stale-notice { background: #dcfce7; border: 1px solid #bbf7d0; padding: 10px 32px; font-size: 0.8rem; color: #166534; }
   .new-batch-header { font-size: 0.8rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin: 18px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #e5e7eb; }
   .empty-state { color: #9ca3af; font-size: 0.85rem; font-style: italic; padding: 12px 0; }
   @media(max-width:600px) { .section { padding: 16px; } .summary { padding: 14px 16px; } .header { padding: 20px 16px; } .stale-notice { padding: 10px 16px; } }
@@ -44,15 +45,16 @@
 
 <div class="header">
   <h1>Two Wheels Marketing — Daily Status</h1>
-  <div class="meta">Updated: April 7, 2026 · 3:00 AM<br>Project: 2026 Tasks From Michelle, Anetra, Jana</div>
+  <div class="meta">Updated: April 8, 2026 · 3:00 AM<br>Project: 2026 Tasks From Michelle, Anetra, Jana</div>
 </div>
 
-<div class="stale-notice">Note: Basecamp reported a service disruption (database in read-only mode) during this run. Data was readable; status reflects live thread reads. Two tasks confirmed completed since last run: Google Analytics Limit and CallRail Social/GBP Tracking (both removed). Three new tasks added.</div>
+<div class="stale-notice">3 tasks completed since last run: Modento Tracking, CallRail Check, and Green Dental — CallRail Website Swap. 1 task updated: Open Tasks received a new comment from Jana. 22 active tasks remain.</div>
 
 <div class="summary">
-  <span class="pill pill-red">🔴 25 Need Your Action</span>
+  <span class="pill pill-red">🔴 22 Need Your Action</span>
   <span class="pill pill-blue">🔵 0 Waiting on Others</span>
-  <span class="pill pill-gray">📋 25 Active Tasks</span>
+  <span class="pill pill-gray">📋 22 Active Tasks</span>
+  <span class="pill pill-green">✅ 3 Completed Today</span>
 </div>
 
 <!-- ACTION REQUIRED -->
@@ -63,30 +65,31 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9750498847" target="_blank">Analytics and tracking Audit for Meta</a>
     </div>
-    <div class="card-meta">Last activity: Jana L. · Apr 3 · 4 days waiting · Due: Tue, Apr 7</div>
+    <div class="card-meta">Last activity: Jana L. · Apr 3 · 5 days waiting · Due: Tue, Apr 7</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
-      <span class="badge badge-red">Due Today</span>
+      <span class="badge badge-red">Overdue</span>
     </div>
-    <div class="note">Jana (Apr 3): 'Hi Ryan, I am getting tagged in this, will you take a look and provide technical direction on what is needed to resolve the potential issue?' — Re: Pixel & CAPI Tracking Audit for Columbus Bath Design (SW). Due today.</div>
+    <div class="note">Jana (Apr 3): Asked Ryan to provide technical direction on Pixel & CAPI Tracking Audit for Columbus Bath Design (SW). Due Apr 7 — now overdue.</div>
   </div>
 
   <div class="card card-red">
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9750502810" target="_blank">Open Tasks</a>
     </div>
-    <div class="card-meta">Last activity: Jana L. · Apr 3 · 4 days waiting · Due: Wed, Apr 8</div>
+    <div class="card-meta">Last activity: Jana L. · Apr 3 · 5 days waiting · Due: Wed, Apr 8</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-yellow">Due Today</span>
     </div>
-    <div class="note">Jana (Apr 3): 'Ryan — Please complete tasks or assign to the person you need to take action on the list of open tasks that are outdated. Thank you!' — References the full Ryan GTM/CallRail/Google Ads task list. Due tomorrow.</div>
+    <div class="note">Ryan asked (Apr 3) whether to stay assigned to tasks he's waiting on. Jana replied (Apr 3): keep yourself on and add the person needing to take action. Last commenter is Jana — action still on Ryan to clean up open tasks. Due today.</div>
   </div>
 
   <div class="card card-red">
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9742093342" target="_blank">PRIORITY — Peter Cocolis</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Apr 6 · 6 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Apr 6 · 7 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-orange">Priority</span>
@@ -99,19 +102,20 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609963251" target="_blank">Create Conversion Goals in GA</a>
     </div>
-    <div class="card-meta">Last activity: Lydia Piero · Apr 1 (linked task) · 6 days waiting · Due: Wed, Mar 25</div>
+    <div class="card-meta">Last activity: Lydia Piero · Apr 1 (linked task) · 7 days waiting · Due: Wed, Mar 25</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
+      <span class="badge badge-orange">Follow Up?</span>
       <span class="badge badge-red">Overdue</span>
     </div>
-    <div class="note">Lydia (Apr 1, linked task): 'Awesome, thank you so much!' — Thank-you page is live at dentalaccountingpros.com. Due date pushed to Apr 6 (now overdue). Conversion goal setup in GA is the remaining step.</div>
+    <div class="note">Lydia (Apr 1, linked task): Thank-you page is live at dentalaccountingpros.com. Due date pushed to Apr 6 (now overdue). Ryan's last reply was Mar 31. Conversion goal setup in GA is the remaining step. 7+ days with no response — consider following up.</div>
   </div>
 
   <div class="card card-red">
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9745197258" target="_blank">Ryan Whiteside Monthly Invoice Submission (May)</a>
     </div>
-    <div class="card-meta">Last activity: Michelle · Apr 2 · 5 days waiting · Due: Sat, May 2</div>
+    <div class="card-meta">Last activity: Michelle · Apr 2 · 6 days waiting · Due: Sat, May 2</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
     </div>
@@ -122,58 +126,22 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9633005704" target="_blank">Ryan Whiteside Monthly Invoice Submission (Apr)</a>
     </div>
-    <div class="card-meta">Last activity: Michelle · Apr 6 · 1 day waiting · Due: Thu, Apr 2</div>
+    <div class="card-meta">Last activity: Michelle · Apr 6 · 2 days waiting · Due: Thu, Apr 2</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-green">Invoice Submitted</span>
       <span class="badge badge-red">Overdue</span>
     </div>
-    <div class="note">Ryan submitted invoice Apr 3 — Michelle confirmed 'Ryan's invoice is approved. Thank you.' (Apr 6). Task still open; awaiting close-out by Michelle/Laura.</div>
+    <div class="note">Ryan submitted invoice Apr 3 — Michelle confirmed approval (Apr 6). Task still open; awaiting close-out by Michelle/Laura.</div>
   </div>
 
-  <div class="card card-red">
-    <div class="card-title">
-      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9695761030" target="_blank">Green Dental — CallRail Website Swap</a>
-    </div>
-    <div class="card-meta">Last activity: Jana L. · Mar 18 · 20 days waiting · Due: Thu, Mar 19</div>
-    <div class="badges">
-      <span class="badge badge-red">Action Required</span>
-      <span class="badge badge-red">Overdue</span>
-    </div>
-    <div class="note">Jana (Mar 18): Urgent — CallRail tracking number not showing correctly on Green Dental (Spencer location). Screenshots provided showing desktop/mobile failures. Asking Ryan to help and flagging Brittanee as AM contact.</div>
-  </div>
-
-  <div class="card card-red">
-    <div class="card-title">
-      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609968633" target="_blank">Modento Tracking</a>
-    </div>
-    <div class="card-meta">Last activity: Michelle · Mar 18 · 20 days waiting · Due: Wed, Mar 25</div>
-    <div class="badges">
-      <span class="badge badge-red">Action Required</span>
-      <span class="badge badge-red">Overdue</span>
-    </div>
-    <div class="note">Michelle (Mar 18): 'Ryan Anetra said you can work on this.' — Cleared to proceed with Modento GTM tracking work.</div>
-  </div>
-
-  <div class="card card-red">
-    <div class="card-title">
-      <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9609972550" target="_blank">CallRail Check</a>
-    </div>
-    <div class="card-meta">Last activity: Michelle · Mar 18 · 20 days waiting · Due: Wed, Mar 25</div>
-    <div class="badges">
-      <span class="badge badge-red">Action Required</span>
-      <span class="badge badge-red">Overdue</span>
-    </div>
-    <div class="note">Michelle (Mar 18): 'Ryan Anetra said you should have access to Whiteboard now.' — Access granted; Ryan can now complete the CallRail check.</div>
-  </div>
-
-  <div class="new-batch-header">Google Ads Conversion Tracking (16 tasks assigned to Ryan)</div>
+  <div class="new-batch-header">Google Ads Conversion Tracking (14 tasks assigned to Ryan)</div>
 
   <div class="card card-red">
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693455387" target="_blank">PRIORITY — Schneider Dental Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-orange">Priority</span>
@@ -186,7 +154,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693478250" target="_blank">PRIORITY — OhioChiro Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Tue, Mar 31 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Tue, Mar 31 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-orange">Priority</span>
@@ -199,7 +167,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693449660" target="_blank">Green Dental - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -211,7 +179,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693451955" target="_blank">Haid Dental - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -223,7 +191,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693460363" target="_blank">Smiley Dental - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -235,7 +203,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693469611" target="_blank">Tzagournis Dental - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 23 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -247,7 +215,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693489796" target="_blank">Aesthetic Oral Health - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Thu, Mar 26 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Thu, Mar 26 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -259,7 +227,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693493538" target="_blank">Craig Callen - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Thu, Mar 26 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Thu, Mar 26 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -271,7 +239,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693497041" target="_blank">Goochland - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Thu, Mar 26 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Thu, Mar 26 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -283,7 +251,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693511024" target="_blank">Hicks- Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Fri, Mar 27 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Fri, Mar 27 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -295,7 +263,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693515087" target="_blank">Indy Implants - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Fri, Mar 27 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Fri, Mar 27 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -307,7 +275,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693519059" target="_blank">Lancaster Family Dental - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Fri, Mar 27 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Fri, Mar 27 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -319,7 +287,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693548691" target="_blank">Sato - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Fri, Mar 27 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Fri, Mar 27 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -331,7 +299,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693554140" target="_blank">Sensational Smiles - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 30 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 30 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -343,7 +311,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693562481" target="_blank">Stiles - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 30 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 30 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
@@ -355,7 +323,7 @@
     <div class="card-title">
       <a href="https://3.basecamp.com/4114768/buckets/23707207/todos/9693567223" target="_blank">Vita - Check Google Ads Conversion Tracking</a>
     </div>
-    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 30 · 20 days waiting</div>
+    <div class="card-meta">Assigned to Ryan W. · Due: Mon, Mar 30 · 21 days waiting</div>
     <div class="badges">
       <span class="badge badge-red">Action Required</span>
       <span class="badge badge-red">Overdue</span>
